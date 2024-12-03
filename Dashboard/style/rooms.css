@@ -1,0 +1,521 @@
+@import url(https://fonts.googleapis.com/css?family=Dosis:200,400,500,600);
+@import url(https://fonts.googleapis.com/css?family=Oswald:700);
+@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:300);
+
+body {
+    margin: 0;
+    background-color: #c4c3c3;
+    display: flex;
+    font-family: 'Roboto Condensed', cursive;
+    user-select: none; 
+}
+
+.overall {
+    display: flex;
+    width: 100%;
+}
+
+.navbar-container {
+    width: 900px;
+    background-color: #f4f4f4;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    margin: 0;
+    padding: 0;
+}
+  
+.navbar-container ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 15%;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+    background-color: #fff;
+}
+  
+.navbar-container li a {
+    display: block;
+    color: #000;
+    padding: 16px 32px;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.navbar-container li {
+    width: 228px;
+}
+  
+.navbar-container li a.active {
+    background-color: #04AA6D;
+}
+
+.navbar-container #dashboard {
+    color: rgb(0, 191, 255);
+}
+  
+.navbar-container li a:hover:not(.active) {
+    background-color: #c4c3c3;
+    color: rgb(0, 191, 255);
+    font-size: 25px;
+    box-shadow: inset 0px 0px 5px rgba(0, 191, 255, 0.5), 0 3px 15px rgba(0, 191, 255, 0.9);
+
+}
+
+.navbar-container h2 {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-left: 10px;
+}
+
+.navbar-container i {
+    margin-left: 5px;
+    margin-right: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.rooms {
+    display: none;
+    padding-left: 20px;
+}
+
+.content {
+    display: grid;
+    grid-template-rows: 180px;
+    height: 100vh;
+    margin-left: 35px;
+    margin-top: 3px;
+    margin-right: 10px;
+    background-image: linear-gradient(to left,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(17, 17, 17, 0.6) 100%), 
+    url(/images/living_room.jpg);
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-position: center; 
+}
+
+.rooms-list {
+    width: 1300px;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 13px;
+    margin-right: 10px;
+    margin-left: 210px;
+    text-align: center;
+}
+
+.room {
+    margin: 10px 40px 10px 10px;
+    height: 100px;
+    width: 300px;
+    border-radius: 4px;
+
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    color: #fff;
+    border-radius: 20px;
+    padding: 5px 5px 5px 5px;
+    transition: transform 0.3s ease; 
+    user-select: none; 
+}
+
+.room:hover {
+    transform: scale(1.3);
+}
+
+
+
+.room:nth-child(1) {
+    background-image: linear-gradient(to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(17, 17, 17, 0.6) 100%), 
+    url(/images/living_room.jpg);
+    border: solid 5px rgb(0, 255, 0);
+    color: rgb(0, 255, 0)
+}
+
+.room:nth-child(2) {
+    background-image: linear-gradient(to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(17, 17, 17, 0.6) 100%), 
+    url(/images/kitchen.webp);
+    border: solid 5px white;
+}
+
+.room:nth-child(3) {
+    background-image: linear-gradient(to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(17, 17, 17, 0.6) 100%), 
+    url(/images/bedroom.jpg);
+    border: solid 5px white;
+}
+
+.room:nth-child(4) {
+    background-image: linear-gradient(to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(17, 17, 17, 0.6) 100%), 
+    url(/images/bathroom.jpg);
+    border: solid 5px white;
+}
+
+.room h2 {
+    top: 350px;
+    left: 30px;
+    font-size: 35px;
+}
+
+.specific-info {
+    width: 75%;
+    height: 90%;
+    border-radius: 30px; 
+    color: #333; 
+    text-align: center; 
+    margin-left: 250px;
+    display: grid;
+    grid-template-columns: 40% 50px 52%;
+}
+
+.specific-info .sensors-display {
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 3px solid #fff;
+    width: 100%;
+    height: 25vh;
+    margin: 30px;
+    border-radius: 20px;
+    user-select: none; 
+}
+
+.last-30-days {
+    margin: 30px 30px 30px 30px;
+    background-color: rgba(255, 255, 255, 1);
+    border: 3px solid #fff;
+    width: 105%;
+    height: 65vh;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+
+/* sensors display */
+.sensors-display {
+    display: grid;
+    grid-template-columns: 30% 70%;
+}
+
+.upper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.thermometer {
+    position: relative;
+    width: 60px;
+    height: 300px;
+    border-radius: 30px;
+    transform: translate(-50%,-40%);
+    left: 50px;
+    top: 20px;
+}
+
+.borders {
+    position: absolute;
+    width: 35px;
+    height: 110px;
+    border: 5px solid #3a3939;
+    border-bottom: none;
+    border-radius: 40px 40px 0 0;
+    transform: translate(50%,59%);
+    bottom: 145px;
+    z-index: 1;
+    background: #ffffff;
+    left: -21px;
+}
+
+
+
+.sensor-bar {
+    height: 0; 
+    width: 25px;
+    background-color: red;
+    border-radius: 25px 25px 0 0;
+    position: absolute;
+    transform-origin: bottom;
+    bottom: 0px; 
+    left: 50%;
+    transform: translate(-50%,  5%);
+    transition: height 1s ease; 
+}
+
+.temperature-value {
+    position: absolute;
+    top: 50%;
+    left: 110%;
+    transform: translateY(-50%);
+    font-weight: bold;
+    color: red;
+    padding: 10px;
+    font-size: 30px;
+}
+
+.circle-term {
+    height: 5px;
+    width: 5px;
+    position: absolute;
+    bottom: 60px;
+    border-radius: 50%;
+    transform: translate(-4%,90%);
+    border: 5px solid #3a3939;
+}
+
+.circle-term-inner::after {
+    content: " ";
+    display: block;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: red;
+    position: absolute;
+    top: 50%;
+    left: 20px ;
+    transform: translate(-50%, -50%);
+    border: 5px solid #3a3939;
+    padding: 5px;
+}
+
+.circle-term::after {
+    content: " ";
+    display: block;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: red;
+    position: absolute;
+    top: 50%;
+    left: 20px ;
+    transform: translate(-50%, -50%);
+    border: 5px solid #fff;
+}
+
+/* Style for ticks */
+.tick {
+    position: absolute;
+    width: 15px;
+    height: 4px;
+    background-color: black; 
+    left: 25px; 
+    z-index: 1; 
+}
+
+/* Positioning ticks at intervals */
+.tick:nth-child(1) { top: 20%; }
+.tick:nth-child(2) { top: 30%; }
+.tick:nth-child(3) { top: 40%; }
+.tick:nth-child(4) { top: 50%; }
+.tick:nth-child(5) { top: 60%; }
+.tick:nth-child(6) { top: 70%; }
+
+/* chart */
+#line-chart {
+    width: 100%; 
+    height: 100%; 
+    margin-bottom: 40px;
+    margin-left: 30px;
+    padding-bottom: 10px;
+}
+
+/* humidity */
+.lower .drop {
+    display: flex;
+    align-items: center;
+    color: #00ccff;
+    font-size: 20px;
+    padding-left: 20px;
+    margin-top: -20px;
+}
+.lower .drop i {
+    padding-left: 5px;
+    padding-right: 10px;
+    font-size: 35px;
+    color: #00ccff
+}
+
+.lower .drop h1 {
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 50px;
+}
+
+/* air quality */
+.co2-level {
+    display: flex;
+    color: #fff;
+    margin-top: -30px;
+    margin-left: 15px;
+}
+
+.co2-level i, h1 {
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 30px;
+}
+
+.co2-level, h3 {
+    margin-bottom: -20px;
+}
+
+.pollutant {
+    display: flex;
+    color: #fff;
+    margin-top: -30px;
+    margin-left: 25px;
+}
+
+.pollutant i, h1 {
+    padding-left: 0px;
+    padding-right: 10px;
+    font-size: 30px;
+}
+
+.co2-level h2, .pollutant h2 {
+    padding-left: 0px;
+    padding-right: 10px;
+}
+
+.pollutant i, .co2-level i {
+    color:rgb(255, 255, 255);
+}
+
+
+/* devices */
+.specific-info .devices {
+    background-color: rgba(255, 255, 255, 0.0);
+    width: 130%;
+    height: 35vh;
+    margin: 30px;
+    border-radius: 20px;
+    user-select: none; 
+}
+
+.devices .device-list {
+    list-style-type: none;
+    padding: 10;
+    margin-top: 10px;
+    max-height: 270px; 
+    overflow-y: auto; /
+}
+
+.devices .device-list li {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgb(255, 255, 255, 0.15);
+    margin: 5px 0;
+    padding: 15px;
+    border-radius: 15px;
+    margin-left: -35px;
+    margin-top: 15px;
+    font-size: 25px;
+    color: white;
+    border: 1px solid #fff;
+}
+
+
+.devices .device-list li:hover {
+    background: rgb(255, 255, 255, 0.6);
+}
+
+.devices .device-list li:nth-child(1){
+    margin-top: 0px;
+}
+
+.control-buttons-range {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 171, 2, 1);
+    padding: 2px;
+    border-radius: 20px;
+}
+
+.control-buttons {
+    display: flex;
+    align-items: center;
+    /* background: rgba(255, 171, 2, 1); */
+    /* padding: 2px; */
+    /* border-radius: 20px; */
+}
+
+.arrow-button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background: rgba(255, 171, 2, 0.9);
+    color: white;
+    margin: 0 5px;
+    font-size: 20px;
+}
+
+.light-level {
+    width: 50px;
+    text-align: center;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    margin-left: 10px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background:  linear-gradient(to left, rgba(255, 255, 255, 0.9) 0%, rgba(255, 171, 2, 0.9) 100%);
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.device-list i {
+    color: #ffffff;
+    font-size: 30px;
+}

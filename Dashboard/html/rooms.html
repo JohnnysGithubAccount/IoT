@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rooms</title>
+    <link rel="stylesheet" href="/style/rooms.css">
+    <script src="https://kit.fontawesome.com/231757307c.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/Draggable.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+    <div class="main">
+        <div class="navbar-container">
+            <ul>
+                <h2><i class="fa-solid fa-house"></i>Smart Home</h2>
+                <li id="dashboard"><a href="/html//index.html"><i class="fa-solid fa-chart-line"></i>Dashboard</a></li>
+                <li id="rooms"><a href="/html/rooms.html" onclick="toggleRooms()"><i class="fa-solid fa-door-closed"></i>Rooms</a></li>
+                <!-- <li id="notifications"><a href="/html/notifications.html"><i class="fa-regular fa-bell"></i>Notifications</a></li>
+                <li id="setting"><a href="/html/setting.html"><i class="fa-solid fa-gear"></i>Setting</a></li> -->
+            </ul>
+        </div>
+        <div class="content">
+            <div class="rooms-list">
+                <div class="room" onclick="changeRoom('livingRoom')" id="livingRoom">
+                    <h2>Living Room</h2>
+                </div>
+                <div class="room" onclick="changeRoom('kitchen')" id="kitchen">
+                    <h2>Kitchen</h2>
+                </div>
+                <div class="room" onclick="changeRoom('bedroom')" id="bedroom">
+                    <h2>Bedroom</h2>
+                </div>
+                <div class="room" onclick="changeRoom('bathroom')" id="bathroom">
+                    <h2>Bathroom</h2>
+                </div>
+            </div>
+            <div class="specific-info">
+                <!-- display the last 30 days temperature, humidity, air quality using a line chart-->
+                <div class="sensors-display-and-devices">
+                    <div class="sensors-display">
+                        <div class="upper">
+                            <div class="temperature">
+                                <div class="thermometer">
+                                    <div class="borders">
+                                        <div class="sensor-bar" id="circleBorder3">
+                                            <div class="temperature-value" id="temperature">0°C</div>
+                                        </div>
+                                    </div>
+                                    <div class="circle-term" id="sensorCircle">
+                                        <div class="circle-term-inner">
+
+                                        </div>
+                                    </div>
+                                    <div class="tick"></div>
+                                    <div class="tick"></div>
+                                    <div class="tick"></div>
+                                    <div class="tick"></div>
+                                </div>     
+                            </div>
+                        </div>
+                        <div class="lower">
+                            <div class="humidity">
+                                <div class="drop">
+                                    <h2><i class="fa-solid fa-droplet"></i>Humidity: </h2>
+                                    <h1 id="humidity-value">70%</h1>
+                                </div>
+                            </div>
+                            <div class="air-quality">
+                                <div class="co2-level">
+                                    <h2><i class="fa-solid fa-atom"></i>CO<sub>2</sub> Level: </h2>
+                                    <h1 id="humidity-value">874</h1>
+                                    <h3>ppm</h3>
+                                </div>
+                                <div class="pollutant">
+                                    <h2><i class="fa-solid fa-smog"></i>Pollutants: </h2>
+                                    <h1 id="humidity-value">61</h1>
+                                    <h3>AQN</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="devices">
+                        <ul id="deviceList" class="device-list"></ul>
+                    </div>
+                </div>
+                <div class="empty">
+
+                </div>
+                <div class="last-30-days">
+                    <div id="line-chart" style="width: 780px; height: 550px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/app/rooms.js"></script>
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js';
+        import { getDatabase, ref, onValue, set, update } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js';
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyC68vYO_g2Vkjv2zLm-uZ9StcKFnVkpta0",
+            authDomain: "dashboard-7543e.firebaseapp.com",
+            databaseURL: "https://dashboard-7543e-default-rtdb.firebaseio.com",
+            projectId: "dashboard-7543e",
+            storageBucket: "dashboard-7543e.appspot.com",
+            messagingSenderId: "102389055033",
+            appId: "1:102389055033:web:e1f5ad1c8f8b34a4c557e8",
+            measurementId: "G-ZQ2JLWNFP6"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        const roomsRef = ref(database, 'rooms'); 
+
+        let roomData = {};
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const roomsRef = ref(database, 'rooms');
+
+            onValue(roomsRef, (snapshot) => {
+                const roomsData = snapshot.val();
+                if (roomsData) {
+                    roomData = transformRoomData(roomsData);
+                    drawChart('livingRoom');
+                } else {
+                    console.error('No data found in rooms.');
+                }
+            }, (error) => {
+                console.error(`Error retrieving data: ${error.message}`);
+            });
+        });
+
+        function transformRoomData(roomsData) {
+            const formattedData = {};
+
+            for (const room in roomsData) {
+                if (roomsData.hasOwnProperty(room)) {
+                    const roomInfo = roomsData[room];
+                    formattedData[room] = [['Date', 'Temperature (°C)', 'Humidity (%)']]; // Initialize with headers
+                    
+                    const tempsHumidity = roomInfo.temperatures_humidity;
+                    for (const date in tempsHumidity) {
+                        if (tempsHumidity.hasOwnProperty(date)) {
+                            const data = tempsHumidity[date];
+                            formattedData[room].push([date, data.temperature, data.humidity]);
+                        }
+                    }
+                }
+            }
+            return formattedData;
+        }
+
+        function drawChart(room) {
+            const temperaturesHumidity = roomData[room];
+            const data = google.visualization.arrayToDataTable(temperaturesHumidity);
+
+            const temperatureValues = data.getDistinctValues(1);
+            const humidityValues = data.getDistinctValues(2);
+
+            const tempMin = Math.min(...temperatureValues);
+            const tempMax = Math.max(...temperatureValues);
+            
+            const humidMin = Math.min(...humidityValues);
+            const humidMax = Math.max(...humidityValues);
+
+            const options = {
+                title: 'Temperature and Humidity Over the Last 30 Days',
+                legend: { position: 'bottom' },
+                hAxis: {
+                    title: 'Date',
+                    format: 'M/d'
+                },
+                vAxes: {
+                    0: { 
+                        title: 'Temperature (°C)', 
+                        minValue: tempMin - 15,
+                        maxValue: tempMax + 15  
+                    },
+                    1: { 
+                        title: 'Humidity (%)', 
+                        minValue: humidMin - 15,
+                        maxValue: humidMax + 15   
+                    }
+                },
+                series: {
+                    0: { 
+                        type: 'line', 
+                        color: 'red', 
+                        targetAxisIndex: 0 
+                    },
+                    1: { 
+                        type: 'line', 
+                        color: 'cyan', 
+                        targetAxisIndex: 1 
+                    }
+                },
+                backgroundColor: 'transparent',
+                tooltip: { isHtml: true }
+            };
+
+            const chart = new google.visualization.ComboChart(document.getElementById('line-chart'));
+            chart.draw(data, options);
+        }
+
+        function handleRoomChange(newRoom) {
+            drawChart(selectedRoom);
+            updateDeviceList();
+            updateMeasurements();
+        }
+
+        function monitorRoomChange() {
+            setInterval(() => {
+                if (selectedRoom !== previousRoom) {
+                    handleRoomChange(selectedRoom);
+                    previousRoom = selectedRoom;
+                }
+            }, 100); 
+        }
+
+        monitorRoomChange();
+        let previousRoom = selectedRoom;
+
+        function getLastTemperatureHumidity(room) {
+            const dbRef = ref(database, `rooms/${room}/temperatures_humidity`);
+            const humidityWeb = document.querySelector('.drop #humidity-value')
+
+            onValue(dbRef, (snapshot) => {
+                const data = snapshot.val();
+
+                if (data) {
+                    const dates = Object.keys(data);
+                    const lastDate = dates[dates.length - 1]; 
+                    const lastMeasurement = data[lastDate]; 
+
+                    if (lastMeasurement) {
+                        const humidity = lastMeasurement.humidity;
+                        const temperature = lastMeasurement.temperature;
+                        humidityWeb.innerHTML = `${humidity}%`
+                        updateThermometer(temperature)
+                    } else {
+                        console.log("No measurements found for the last date.");
+                    }
+                } else {
+                    console.log("No data available for this room.");
+                }
+            }, {
+                onlyOnce: true 
+            });
+        }
+
+        function updateMeasurements() {    
+            let co2Ref = ref(database, `rooms/${selectedRoom}/co2`);
+            let pollutantRef = ref(database, `rooms/${selectedRoom}/pollutant`);
+
+            const co2Web = document.querySelector('.co2-level #humidity-value');
+            const pollutantWeb = document.querySelector('.pollutant #humidity-value');
+
+            onValue(co2Ref, snap => {
+                const co2Value = snap.val();
+                co2Web.innerHTML = co2Value !== null ? co2Value : 'N/A'; 
+            });
+
+            onValue(pollutantRef, snap => {
+                const pollutantValue = snap.val();
+                pollutantWeb.innerHTML = pollutantValue !== null ? pollutantValue : 'N/A'; 
+            });
+
+            getLastTemperatureHumidity(selectedRoom);
+        }
+
+
+        function getDeviceStatusesForRoom(room) {
+            const roomRef = ref(database, `rooms/${room}/devices`);
+
+            onValue(roomRef, (snapshot) => {
+                const devicesData = snapshot.val();
+                
+                if (devicesData) {
+                    const deviceStatuses = {};
+
+                    for (const deviceName in devicesData) {
+                        if (devicesData.hasOwnProperty(deviceName)) {
+                            if (deviceName.toLowerCase().includes("light") || deviceName.toLowerCase().includes("lamp")){
+                                deviceStatuses[deviceName] = devicesData[deviceName].quantity;
+                            }
+                            else {
+                                deviceStatuses[deviceName] = devicesData[deviceName].status;
+                            }
+                            
+                        }
+                    }
+
+                    console.log("Device Statuses for Room:", room);
+                    console.log(deviceStatuses);
+                    
+                    let btns = document.querySelectorAll('.device-list input')
+                    btns.forEach(button=> {
+                        console.log(button.id);
+                        if (deviceStatuses[button.id] == 1) {
+                            button.checked = true;
+                        }
+                        else {
+                            button.checked = false;
+                        }
+                    })
+
+                    let levels = document.querySelectorAll('.light-level')
+                    levels.forEach(level  => {
+                        console.log(level.id)
+                        level.textContent = deviceStatuses[level.id]
+                    })
+                } else {
+                    console.log(`No devices found for room: ${room}`);
+                }
+            }, {
+                onlyOnce: true
+            });
+        }
+
+        function updateDatabase() {
+            let btns = document.querySelectorAll('.device-list input')
+
+            btns.forEach(button=> {
+                const dbRef = ref(database, `rooms/${selectedRoom}/devices/${button.id}`)
+                if (button.checked){
+                    update(dbRef, {status: 1})
+                }
+                else {
+                    update(dbRef, {status: 0})
+                }
+            })
+
+            let levels = document.querySelectorAll('.light-level')
+            levels.forEach(level  => {
+                const dbRef = ref(database, `rooms/${selectedRoom}/devices/${level.id}`)
+                update(dbRef, {quantity: parseInt(level.textContent)})
+            })
+
+            let livingRoomLockRef = ref(database, "rooms/livingRoom/devices/Lock/status")
+            let temp1 = null
+            let temp2 = null
+            let temp3 = null
+            onValue(livingRoomLockRef, snap => {
+                console.log(snap.val())
+                temp1 = snap.val()
+            })
+            let kitchenLockRef = ref(database, "rooms/kitchen/devices/Lock/status")
+            onValue(livingRoomLockRef, snap => {
+                console.log(snap.val())
+                temp2 = snap.val()
+            })
+            let bathroomLockRef = ref(database, "rooms/bathroom/device/Lock/status")
+            onValue(livingRoomLockRef, snap => {
+                console.log(snap.val())
+                temp3 = snap.val()
+            })
+            let locksRef = ref(database, "my-device");
+            if (temp1 === 0 || temp2 === 0 || temp3 === 0){
+                console.log('this is running');
+                update(locksRef, {locks: 0})
+            }
+            if (temp1 === 1 && temp2 === 1 && temp3 === 1){
+                update(locksRef, {locks: 1})
+            }
+        }
+
+        const devicesElements = document.querySelector('.device-list')
+        devicesElements.addEventListener('click', updateDatabase)
+
+        window.onload = function () {
+            updateMeasurements();
+            updateDeviceList();
+            document.querySelector('.control-buttons-range').addEventListener('click', updateDatabase)
+            getDeviceStatusesForRoom('livingRoom');
+            drawChart('livingRoom');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Room Data to Firebase</title>
+    <!-- <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script> -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js"></script> -->
+</head>
+<body>
+    <h1>Adding Room Data to Firebase</h1>
+    <button id="addDataBtn">Add Room Data</button>
+
+    <script src="app.js"></script>
+    
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-analytics.js"></script>
+  <script>
+    // firebase
+    const firebaseConfig = {
+        apiKey: "AIzaSyC68vYO_g2Vkjv2zLm-uZ9StcKFnVkpta0",
+        authDomain: "dashboard-7543e.firebaseapp.com",
+        databaseURL: "https://dashboard-7543e-default-rtdb.firebaseio.com",
+        projectId: "dashboard-7543e",
+        storageBucket: "dashboard-7543e.appspot.com",
+        messagingSenderId: "102389055033",
+        appId: "1:102389055033:web:e1f5ad1c8f8b34a4c557e8",
+        measurementId: "G-ZQ2JLWNFP6"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+
+    const roomData = {
+        livingRoom: [
+            ['Date', 'Temperature (°C)', 'Humidity (%)'],
+            ['2023-09-01',  22, 60],
+            ['2023-09-02',  24, 65],
+            ['2023-09-03',  23, 62],
+            ['2023-09-04',  25, 70],
+            ['2023-09-05',  24, 68],
+            ['2023-09-06',  23, 61],
+            ['2023-09-07',  22, 59],
+            ['2023-09-08',  24, 66],
+            ['2023-09-09',  26, 72],
+            ['2023-09-10',  27, 75],
+            ['2023-09-11',  28, 78],
+            ['2023-09-12',  26, 74],
+            ['2023-09-13',  25, 71],
+            ['2023-09-14',  24, 69],
+            ['2023-09-15',  22, 66],
+            ['2023-09-16',  23, 64],
+            ['2023-09-17',  24, 67],
+            ['2023-09-18',  25, 70],
+            ['2023-09-19',  26, 73],
+            ['2023-09-20',  27, 76],
+            ['2023-09-21',  25, 72],
+            ['2023-09-22',  24, 69],
+            ['2023-09-23',  23, 67],
+            ['2023-09-24',  22, 65],
+            ['2023-09-25',  21, 63],
+            ['2023-09-26',  22, 61],
+            ['2023-09-27',  23, 64],
+            ['2023-09-28',  24, 66],
+            ['2023-09-29',  25, 68],
+            ['2023-09-30',  26, 70]
+        ],
+        kitchen: [
+            ['Date', 'Temperature (°C)', 'Humidity (%)'],
+            ['2023-09-01',  24, 70],
+            ['2023-09-02',  26, 75],
+            ['2023-09-03',  25, 73],
+            ['2023-09-04',  27, 78],
+            ['2023-09-05',  28, 80],
+            ['2023-09-06',  26, 77],
+            ['2023-09-07',  25, 76],
+            ['2023-09-08',  27, 79],
+            ['2023-09-09',  29, 82],
+            ['2023-09-10',  30, 85],
+            ['2023-09-11',  29, 83],
+            ['2023-09-12',  28, 81],
+            ['2023-09-13',  27, 78],
+            ['2023-09-14',  28, 80],
+            ['2023-09-15',  29, 82],
+            ['2023-09-16',  30, 84],
+            ['2023-09-17',  31, 86],
+            ['2023-09-18',  30, 83],
+            ['2023-09-19',  29, 81],
+            ['2023-09-20',  28, 79],
+            ['2023-09-21',  27, 76],
+            ['2023-09-22',  28, 78],
+            ['2023-09-23',  29, 80],
+            ['2023-09-24',  30, 82],
+            ['2023-09-25',  31, 85],
+            ['2023-09-26',  30, 83],
+            ['2023-09-27',  29, 81],
+            ['2023-09-28',  28, 79],
+            ['2023-09-29',  27, 77],
+            ['2023-09-30',  26, 75]
+        ],
+        bedroom: [
+            ['Date', 'Temperature (°C)', 'Humidity (%)'],
+            ['2023-09-01',  20, 55],
+            ['2023-09-02',  21, 60],
+            ['2023-09-03',  19, 52],
+            ['2023-09-04',  21, 58],
+            ['2023-09-05',  22, 64],
+            ['2023-09-06',  23, 66],
+            ['2023-09-07',  20, 54],
+            ['2023-09-08',  19, 53],
+            ['2023-09-09',  18, 50],
+            ['2023-09-10',  20, 55],
+            ['2023-09-11',  21, 57],
+            ['2023-09-12',  22, 62],
+            ['2023-09-13',  23, 64],
+            ['2023-09-14',  24, 66],
+            ['2023-09-15',  25, 68],
+            ['2023-09-16',  24, 67],
+            ['2023-09-17',  23, 65],
+            ['2023-09-18',  22, 63],
+            ['2023-09-19',  21, 61],
+            ['2023-09-20',  20, 59],
+            ['2023-09-21',  19, 55],
+            ['2023-09-22',  18, 54],
+            ['2023-09-23',  19, 56],
+            ['2023-09-24',  20, 58],
+            ['2023-09-25',  21, 60],
+            ['2023-09-26',  22, 61],
+            ['2023-09-27',  23, 63],
+            ['2023-09-28',  24, 64],
+            ['2023-09-29',  25, 66],
+            ['2023-09-30',  26, 68]
+        ],
+        bathroom: [
+            ['Date', 'Temperature (°C)', 'Humidity (%)'],
+            ['2023-09-01',  21, 65],
+            ['2023-09-02',  22, 70],
+            ['2023-09-03',  21, 68],
+            ['2023-09-04',  23, 72],
+            ['2023-09-05',  24, 75],
+            ['2023-09-06',  23, 74],
+            ['2023-09-07',  22, 71],
+            ['2023-09-08',  24, 76],
+            ['2023-09-09',  25, 78],
+            ['2023-09-10',  26, 80],
+            ['2023-09-11',  25, 79],
+            ['2023-09-12',  24, 77],
+            ['2023-09-13',  23, 75],
+            ['2023-09-14',  24, 78],
+            ['2023-09-15',  25, 80],
+            ['2023-09-16',  26, 82],
+            ['2023-09-17',  27, 84],
+            ['2023-09-18',  26, 81],
+            ['2023-09-19',  25, 79],
+            ['2023-09-20',  24, 77],
+            ['2023-09-21',  23, 75],
+            ['2023-09-22',  24, 78],
+            ['2023-09-23',  25, 80],
+            ['2023-09-24',  26, 82],
+            ['2023-09-25',  27, 85],
+            ['2023-09-26',  28, 83],
+            ['2023-09-27',  27, 81],
+            ['2023-09-28',  26, 79],
+            ['2023-09-29',  25, 77],
+            ['2023-09-30',  24, 75]
+        ]
+    };
+
+    function addRoomData() {
+        for (const room in roomData) {
+            const dataRef = database.ref('rooms/' + room + "/temperatures_humidity");
+            const values = roomData[room].slice(1); // Remove the header row
+
+            // Prepare data to upload
+            const roomEntries = {};
+            values.forEach(entry => {
+                const date = entry[0];
+                roomEntries[date] = {
+                    temperature: entry[1],
+                    humidity: entry[2]
+                };
+            });
+
+            // Set the data in Firebase
+            dataRef.set(roomEntries)
+            .then(() => {
+                console.log(`Data for ${room} added successfully.`);
+            })
+            .catch((error) => {
+                console.error(`Error adding data for ${room}:`, error);
+            });
+        }
+    }
+
+    document.getElementById('addDataBtn').addEventListener('click', addRoomData);
+     </script>
+</body>
+</html>

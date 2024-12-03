@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/style/style.css">
+    <script src="https://kit.fontawesome.com/231757307c.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+    <div class="overall">
+        <div class="navbar-container">
+            <ul>
+                <h2><i class="fa-solid fa-house"></i>Smart Home</h2>
+                <li id="dashboard"><a href="#"><i class="fa-solid fa-chart-line"></i>Dashboard</a></li>
+                <li id="rooms"><a href="./rooms.html" onclick="toggleRooms()"><i class="fa-solid fa-door-closed"></i>Rooms</a></li>
+                <!-- <li id="notifications"><a href="/html/notifications.html"><i class="fa-regular fa-bell"></i>Notifications</a></li>
+                <li id="setting"><a href="/html/setting.html"><i class="fa-solid fa-gear"></i>Setting</a></li> -->
+            </ul>
+        </div>
+        <div class="content">
+            <div class="device-and-power-usage">
+                <div class="my-device">
+                    <div class="title-clock">
+                        <h2>My Devices</h2>
+                        <div class="clock">                            
+                            <h1>Current time:  
+                              <div class="counter hours">
+                                <span class="decor top"></span>
+                                <span class="decor bottom"></span>
+                                <span class="from top"><span></span>
+                                <span class="shadow"></span></span>
+                                <span class="from bottom"><span></span>
+                                <span class="shadow"></span></span>
+                                <span class="to top"><span></span>
+                                <span class="shadow"></span></span>
+                                <span class="to bottom"><span></span>
+                                <span class="shadow"></span></span>
+                              </div>
+                              <span>:</span>
+                              <div class="counter minutes">
+                                <span class="decor top"></span>
+                                <span class="decor bottom"></span>
+                                <span class="from top"><span></span>
+                                <span class="shadow"></span></span>
+                                <span class="from bottom"><span></span>
+                                <span class="shadow"></span></span>
+                                <span class="to top"><span></span>
+                                <span class="shadow"></span></span>
+                                <span class="to bottom"><span></span>
+                                <span class="shadow"></span></span>
+                              </div>
+                              <span>:</span>
+                              <div class="counter seconds">
+                                <span class="decor top"></span>
+                                <span class="decor bottom"></span>
+                                <span class="from top"><span></span>
+                                <span class="shadow"></span></span>
+                                <span class="from bottom"><span></span>
+                                <span class="shadow"></span></span>
+                                <span class="to top"><span></span>
+                                <span class="shadow"></span></span>
+                                <span class="to bottom"><span></span>
+                                <span class="shadow"></span></span>
+                              </div>                                
+                            </h1>                            
+                          </div>
+                    </div>
+                    <div class="devices">
+                        <div class="upper">
+                            <div class="device" id="locks">
+                                <div class="left">
+                                    <i class="fa-solid fa-lock"></i>
+                                    <h3>Every Locks</h3>
+                                    <h5>Active for 3 hours</h5>
+                                </div>
+                                <div class="right">
+                                    <div class="button">
+                                        <div class="power-switch">
+                                            <input type="checkbox" id="locks"/>
+                                            <div class="button">
+                                              <svg class="power-off">
+                                                <use xlink:href="#line" class="line" />
+                                                <use xlink:href="#circle" class="circle" />
+                                              </svg>
+                                              <svg class="power-on">
+                                                <use xlink:href="#line" class="line" />
+                                                <use xlink:href="#circle" class="circle" />
+                                              </svg>
+                                            </div>
+                                          </div>
+                                          <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                                            <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" id="line">
+                                              <line x1="75" y1="34" x2="75" y2="58"/>
+                                            </symbol>
+                                            <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" id="circle">
+                                              <circle cx="75" cy="80" r="35"/>
+                                            </symbol>
+                                          </svg>
+                                    </div>
+                                    <div class="power-consumption">
+                                        <h4>5Kwh</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="device" id="wifi-extenders">
+                                <div class="left">
+                                    <i class="fa-solid fa-house-signal"></i>
+                                    <h3>Wifi Extenders</h3>
+                                    <h5>Active for 7 hours</h5>
+                                </div>
+                                <div class="right">
+                                    <div class="button">
+                                        <div class="power-switch">
+                                            <input type="checkbox" id="wifiExtenders"/>
+                                            <div class="button">
+                                              <svg class="power-off">
+                                                <use xlink:href="#line" class="line" />
+                                                <use xlink:href="#circle" class="circle" />
+                                              </svg>
+                                              <svg class="power-on">
+                                                <use xlink:href="#line" class="line" />
+                                                <use xlink:href="#circle" class="circle" />
+                                              </svg>
+                                            </div>
+                                          </div>
+                                          <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                                            <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" id="line">
+                                              <line x1="75" y1="34" x2="75" y2="58"/>
+                                            </symbol>
+                                            <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" id="circle">
+                                              <circle cx="75" cy="80" r="35"/>
+                                            </symbol>
+                                          </svg>
+                                    </div>
+                                    <div class="power-consumption">
+                                        <h4>5Kwh</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="device" id="wifi">
+                                <div class="left">
+                                    <i class="fa-solid fa-wifi"></i>
+                                    <h3>Wifi</h3>
+                                    <h5>Active for 10 hours</h5>
+                                </div>
+                                <div class="right">
+                                    <div class="button">
+                                        <div class="power-switch">
+                                            <input type="checkbox" id="wifi"/>
+                                            <div class="button">
+                                              <svg class="power-off">
+                                                <use xlink:href="#line" class="line" />
+                                                <use xlink:href="#circle" class="circle" />
+                                              </svg>
+                                              <svg class="power-on">
+                                                <use xlink:href="#line" class="line" />
+                                                <use xlink:href="#circle" class="circle" />
+                                              </svg>
+                                            </div>
+                                          </div>
+                                          <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                                            <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" id="line">
+                                              <line x1="75" y1="34" x2="75" y2="58"/>
+                                            </symbol>
+                                            <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" id="circle">
+                                              <circle cx="75" cy="80" r="35"/>
+                                            </symbol>
+                                          </svg>
+                                    </div>
+                                    <div class="power-consumption">
+                                        <h4>5Kwh</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lower">
+                            <div class="device" id="insideLights">
+                                <div class="left">
+                                    <i class="fa-regular fa-lightbulb"></i>
+                                    <h3>Inside Lights</h3>
+                                    <h5>Active for 4 hours</h5>
+                                </div>
+                                <div class="right">
+                                    <div class="button">
+                                        <div class="power-switch">
+                                            <input type="checkbox" id="insideLights"/>
+                                            <div class="button">
+                                              <svg class="power-off">
+                                                <use xlink:href="#line" class="line" />
+                                                <use xlink:href="#circle" class="circle" />
+                                              </svg>
+                                              <svg class="power-on">
+                                                <use xlink:href="#line" class="line" />
+                                                <use xlink:href="#circle" class="circle" />
+                                              </svg>
+                                            </div>
+                                          </div>
+                                          <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                                            <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" id="line">
+                                              <line x1="75" y1="34" x2="75" y2="58"/>
+                                            </symbol>
+                                            <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" id="circle">
+                                              <circle cx="75" cy="80" r="35"/>
+                                            </symbol>
+                                          </svg>
+                                    </div>
+                                    <div class="power-consumption">
+                                        <h4>5Kwh</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="device" id="outsideLights">
+                                <div class="left">
+                                    <i class="fa-regular fa-sun"></i>
+                                    <h3>Outside Lights</h3>
+                                    <h5>Active for 3 hours</h5>
+                                </div>
+                                <div class="right">
+                                    <div class="button">
+                                        <div class="power-switch">
+                                            <input type="checkbox" id="outsideLights"/>
+                                            <div class="button">
+                                              <svg class="power-off">
+                                                <use xlink:href="#line" class="line" />
+                                                <use xlink:href="#circle" class="circle" />
+                                              </svg>
+                                              <svg class="power-on">
+                                                <use xlink:href="#line" class="line" />
+                                                <use xlink:href="#circle" class="circle" />
+                                              </svg>
+                                            </div>
+                                          </div>
+                                          <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                                            <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" id="line">
+                                              <line x1="75" y1="34" x2="75" y2="58"/>
+                                            </symbol>
+                                            <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" id="circle">
+                                              <circle cx="75" cy="80" r="35"/>
+                                            </symbol>
+                                          </svg>
+                                    </div>
+                                    <div class="power-consumption">
+                                        <h4>5Kwh</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="device" id="heater">
+                                <div class="left">
+                                    <i class="fa-solid fa-temperature-arrow-up"></i>
+                                    <h3>Heater</h3>
+                                    <h5>Active for 0 hours</h5>
+                                </div>
+                                <div class="right">
+                                    <div class="button">
+                                        <div class="power-switch">
+                                            <input type="checkbox" id="heater"/>
+                                            <div class="button">
+                                              <svg class="power-off">
+                                                <use xlink:href="#line" class="line" />
+                                                <use xlink:href="#circle" class="circle" />
+                                              </svg>
+                                              <svg class="power-on">
+                                                <use xlink:href="#line" class="line" />
+                                                <use xlink:href="#circle" class="circle" />
+                                              </svg>
+                                            </div>
+                                          </div>
+                                          <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                                            <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" id="line">
+                                              <line x1="75" y1="34" x2="75" y2="58"/>
+                                            </symbol>
+                                            <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" id="circle">
+                                              <circle cx="75" cy="80" r="35"/>
+                                            </symbol>
+                                          </svg>
+                                    </div>
+                                    <div class="power-consumption">
+                                        <h4>5Kwh</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="power-usage">
+                    <div class="title">
+                        <h2>Power Usage</h2>
+                        <div class="wrapper">
+                            <div class="empty"></div>
+                            <div class="room-toggle">
+                                <div class="highlight" id="highlight"></div>
+                                <button onclick="toggleRoom('all')" id="allBtn" class="active">All</button>
+                                <button onclick="toggleRoom('livingRoom')" id="livingRoomBtn">Living Room</button>
+                                <button onclick="toggleRoom('kitchen')" id="kitchenBtn">Kitchen</button>
+                                <button onclick="toggleRoom('bedroom')" id="bedroomBtn">Bedroom</button>
+                                <button onclick="toggleRoom('bathroom')" id="bathroomBtn">Bathroom</button>
+                            </div>
+                            <div class="empty"></div>
+                        </div>
+                    </div>
+                    <div class="contents">
+                        <div class="chart">
+                            <div class="header">
+                            </div>
+                            <div class="chart-content">
+                                <div id="chart-id" style="width: 600px; height: 230px;"></div>
+                            </div>
+                        </div>
+                        <div class="gadgets" id="deviceList"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="sensor-display">
+                <div class="temperature">
+                    <div class="title">
+                        <h1>Average Temperature</h2>
+                        <div class="more">
+                        </div>
+                    </div>
+                    <div class="temperature-contents">
+                        <div class="container">
+                            <div class="de">
+                                <div class="den">
+                                  <div class="dene">
+                                    <div class="denem">
+                                      <div class="deneme" id="temperature-display">
+                                        0<span>C</span><strong>&deg;</strong>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <div class="humidity">
+                        <div class="humidity-title">
+                            <h1>Average Humidity</h1>
+                        </div>
+                        <div class="empty"></div>
+                        <div class="humidity-contents">
+                            <svg version="1.1" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink" x="0px" y="0px" style="display: none;">
+                                <symbol id="wave">
+                                  <path d="M420,20c21.5-0.4,38.8-2.5,51.1-4.5c13.4-2.2,26.5-5.2,27.3-5.4C514,6.5,518,4.7,528.5,2.7c7.1-1.3,17.9-2.8,31.5-2.7c0,0,0,0,0,0v20H420z"></path>
+                                  <path d="M420,20c-21.5-0.4-38.8-2.5-51.1-4.5c-13.4-2.2-26.5-5.2-27.3-5.4C326,6.5,322,4.7,311.5,2.7C304.3,1.4,293.6-0.1,280,0c0,0,0,0,0,0v20H420z"></path>
+                                  <path d="M140,20c21.5-0.4,38.8-2.5,51.1-4.5c13.4-2.2,26.5-5.2,27.3-5.4C234,6.5,238,4.7,248.5,2.7c7.1-1.3,17.9-2.8,31.5-2.7c0,0,0,0,0,0v20H140z"></path>
+                                  <path d="M140,20c-21.5-0.4-38.8-2.5-51.1-4.5c-13.4-2.2-26.5-5.2-27.3-5.4C46,6.5,42,4.7,31.5,2.7C24.3,1.4,13.6-0.1,0,0c0,0,0,0,0,0l0,20H140z"></path>
+                                </symbol>
+                              </svg>
+                              <div class="water-jar">
+                                <div class="water-filling">
+                                  <div class="percentNum" id="count">0</div>
+                                  <div class="percentB">%</div>
+                                </div>
+                                <div id="water" class="water">
+                                  <svg viewBox="0 0 560 20" class="water_wave water_wave_back">
+                                    <use xlink:href="#wave"></use>
+                                  </svg>
+                                  <svg viewBox="0 0 560 20" class="water_wave water_wave_front">
+                                    <use xlink:href="#wave"></use>
+                                  </svg>
+                                </div>
+                              </div>
+                        </div>
+                </div>
+                <div class="air-quality">
+                    <div class="air-quality-title">
+                        <h1>Average Air Quality</h1>
+                    </div>
+                    <div class="air-quality-contents">
+                        <div class="moderate">
+                            <h5><i class="fa-solid fa-atom"></i>Moderate</h4>
+                            <div class="values">
+                                <h4>CO<sub>2</sub></h4>
+                                <div class="empty">
+                                    
+                                </div>
+                                <div class="num">
+                                    <h3>874</h3>
+                                    <h6>ppm</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="empty-space">
+
+                        </div>
+                        <div class="pollutants">
+                            <h4><i class="fa-solid fa-smog"></i>Excellent</h4>
+                            <div class="values">
+                                <h6>Pollutants</h6>
+                                <div class="empty">
+                                    
+                                </div>
+                                <div class="num">
+                                    <h3>60</h3>
+                                    <h6>AQN</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="/app/app.js"></script>     
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js';
+        import { getDatabase, ref, onValue, set, update } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js';
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyC68vYO_g2Vkjv2zLm-uZ9StcKFnVkpta0",
+            authDomain: "dashboard-7543e.firebaseapp.com",
+            databaseURL: "https://dashboard-7543e-default-rtdb.firebaseio.com",
+            projectId: "dashboard-7543e",
+            storageBucket: "dashboard-7543e.appspot.com",
+            messagingSenderId: "102389055033",
+            appId: "1:102389055033:web:e1f5ad1c8f8b34a4c557e8",
+            measurementId: "G-ZQ2JLWNFP6"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        const deviceRefs = {
+            heater: ref(database, 'my-device/heater'),
+            insideLights: ref(database, 'my-device/insideLights'),
+            locks: ref(database, 'my-device/locks'),
+            outsideLights: ref(database, 'my-device/outsideLights'),
+            wifi: ref(database, 'my-device/wifi'),
+            wifiExtenders: ref(database, 'my-device/wifiExtenders'),
+        };
+
+        const switchMapping = {};
+
+        function initializeSwitchMapping() {
+            Object.keys(deviceRefs).forEach(device => {
+                onValue(deviceRefs[device], (snapshot) => {
+                    switchMapping[device] = snapshot.val() ? 1 : 0; 
+                    setPowerBtnStages(); 
+                });
+            });
+        }
+
+        const roomsRef = ref(database, 'rooms');
+
+        function setPowerBtnStages() {
+            const powerSwitches = document.querySelectorAll('.power-switch input');
+
+            powerSwitches.forEach(switchElement => {
+                const id = switchElement.id; 
+                switchElement.checked = switchMapping[id] === 1;
+
+                switchElement.addEventListener('click', () => {
+                    const newValue = switchElement.checked ? 1 : 0; 
+                    set(deviceRefs[id], newValue); 
+                    if (id === 'locks') {
+                      const rooms = ['livingRoom', 'bedroom', 'bathroom']; 
+                      for (const roomStr of rooms) { 
+                          const databaseRef = ref(database, `rooms/${roomStr}/devices/Lock/status`); 
+                          const newValue = switchElement.checked ? 1 : 0; 
+                          set(databaseRef, newValue)  
+                              .then(() => {
+                                  console.log(`Value set successfully for ${roomStr}.`);
+                              })
+                              .catch((error) => {
+                                  console.error(`Error setting value for ${roomStr}:`, error);
+                              });
+                      }
+                  }
+                });
+            });
+        }
+
+        // temperature
+        function animateNumbers(start, end, duration) {
+            const element = document.getElementById('temperature-display');
+            const startTime = performance.now();
+
+            function update() {
+                const currentTime = performance.now();
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1); 
+
+                const currentValue = Math.round(start + (end - start) * progress);
+
+                element.innerHTML = `${currentValue}<span>C</span><strong>&deg;</strong>`;
+
+                if (progress < 1) {
+                    requestAnimationFrame(update); 
+                }
+            }
+            requestAnimationFrame(update);
+        }
+
+        function updateTemperature(newTemperature) {
+            const temperatureDisplay = document.getElementById('temperature-display');
+            const currentTemperature = parseFloat(temperatureDisplay.innerText);
+            animateNumbers(currentTemperature, newTemperature, 1000); 
+        }
+
+        // humidity
+        function setWaterDisplay(targetPercent) {
+            const countElement = document.getElementById("count");
+            const waterElement = document.getElementById("water");
+            const currentPercent = parseInt(countElement.innerHTML) || 0;
+            const increment = targetPercent > currentPercent ? 1 : -1; 
+            const duration = 3000; 
+            const steps = Math.abs(targetPercent - currentPercent);
+            const interval = duration / steps;
+            
+            let current = currentPercent;
+
+            const updateDisplay = () => {
+                if (current !== targetPercent) {
+                    current += increment;
+                    countElement.innerHTML = current;
+                    waterElement.style.transform = 'translate(0,' + (100 - current) + '%)';
+                    requestAnimationFrame(updateDisplay);
+                }
+            };
+
+            updateDisplay(); 
+        }
+
+        // Function to calculate averages
+        function calculateAverages() {
+            onValue(roomsRef, (snapshot) => {
+                const roomsData = snapshot.val();
+                if (!roomsData) return;
+
+                let totalCO2 = 0;
+                let totalPollutants = 0;
+                let roomCount = 0;
+
+                let latestDate = null;
+                let humidityData = [];
+                let temperatureData = [];
+
+                Object.keys(roomsData).forEach(room => {
+                    const roomInfo = roomsData[room];
+
+                    if (roomInfo.co2 !== undefined) {
+                        totalCO2 += roomInfo.co2;
+                    }
+                    if (roomInfo.pollutant !== undefined) {
+                        totalPollutants += roomInfo.pollutant;
+                    }
+                    roomCount++;
+
+                    if (roomInfo.temperatures_humidity) {
+                        Object.keys(roomInfo.temperatures_humidity).forEach(date => {
+                            const data = roomInfo.temperatures_humidity[date];
+
+                            if (!latestDate || date > latestDate) {
+                                latestDate = date;
+                                humidityData = [data.humidity];
+                                temperatureData = [data.temperature]; 
+                            } else if (date === latestDate) {
+                                humidityData.push(data.humidity);
+                                temperatureData.push(data.temperature);
+                            }
+                        });
+                    }
+                });
+
+                // Calculate averages
+                const averageCO2 = roomCount ? Math.round(totalCO2 / roomCount) : 0;
+                const averagePollutants = roomCount ? Math.round(totalPollutants / roomCount) : 0;
+                const averageHumidity = humidityData.length ? Math.round(humidityData.reduce((a, b) => a + b, 0) / humidityData.length) : 0;
+                const averageTemperature = temperatureData.length ? Math.round(temperatureData.reduce((a, b) => a + b, 0) / temperatureData.length) : 0;
+                const ratingCo2 = document.querySelector('.air-quality-contents .moderate h5')
+                const ratingPollutant = document.querySelector('.pollutants h4')
+
+                let co2 = document.querySelector('.moderate .values .num h3');
+                co2.innerHTML = averageCO2;
+                if (averageCO2 >= 400 && averageCO2 <=600){
+                    ratingCo2.innerHTML = '<i class="fa-solid fa-atom" aria-hidden="true"></i>Exellent'
+                }
+                else if (averageCO2 > 600 && averageCO2 <=800){
+                    ratingCo2.innerHTML = '<i class="fa-solid fa-atom" aria-hidden="true"></i>Good'
+                }
+                else if (averageCO2 > 800 && averageCO2 <= 1000){
+                    ratingCo2.innerHTML = '<i class="fa-solid fa-atom" aria-hidden="true"></i>Fair'
+                }
+                else if (averageCO2 > 1000 && averageCO2 <= 1500){
+                    ratingCo2.innerHTML = '<i class="fa-solid fa-atom" aria-hidden="true"></i>Mediocre'
+                }
+                else {
+                    ratingCo2.innerHTML = '<i class="fa-solid fa-atom" aria-hidden="true"></i>Bad'
+                }
+                
+                let pollutant = document.querySelector('.pollutants .values .num h3')
+                pollutant.innerHTML = averagePollutants
+                if (averagePollutants >= 0 && averagePollutants <= 25){
+                    ratingPollutant.innerHTML = '<i class="fa-solid fa-smog" aria-hidden="true"></i>Severely polluted'
+                }
+                else if (averagePollutants > 25 && averagePollutants <= 50){
+                    ratingPollutant.innerHTML = '<i class="fa-solid fa-smog" aria-hidden="true"></i>Very polluted'
+                }
+                else if (averagePollutants > 50 && averagePollutants <= 75){
+                  ratingPollutant.innerHTML = '<i class="fa-solid fa-smog" aria-hidden="true"></i>Polluted'
+                }
+                else if (averagePollutants > 75 && averagePollutants <= 100){
+                    ratingPollutant.innerHTML = '<i class="fa-solid fa-smog" aria-hidden="true"></i>Moderate'
+                }
+                else {
+                    ratingPollutant.innerHTML = '<i class="fa-solid fa-smog" aria-hidden="true"></i>Good'
+                }
+                updateTemperature(averageTemperature);
+                setWaterDisplay(averageHumidity);
+            });
+        }
+
+        function updateDeviceValues(roomsData) {
+            const quantityInputs = document.querySelectorAll('.gadgets .device input');
+            const toggleBtns = document.querySelectorAll('.gadgets .device .toggle-button');
+
+            const deviceValues = {};
+
+            for (const room in roomsData) {
+                const devices = roomsData[room].devices;
+                for (const deviceName in devices) {
+                    deviceValues[`${room}_${deviceName}`] = devices[deviceName]; // Use room_name/device_name format
+                }
+            }
+
+            quantityInputs.forEach(input => {
+                const deviceId = input.id; 
+                if (deviceValues[deviceId]) {
+                    input.value = deviceValues[deviceId].quantity  || 0; 
+                }
+            });
+
+
+            toggleBtns.forEach(btn => {
+                const deviceId = btn.id; 
+
+                if (deviceValues[deviceId] && deviceValues[deviceId].status === 1) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+          }
+
+
+        function updateDatabase() {
+            const quantityInputs = document.querySelectorAll('.gadgets .device input');
+            const toggleBtns = document.querySelectorAll('.gadgets .device .toggle-button');
+
+            quantityInputs.forEach(input => {
+                const deviceId = input.id; 
+                const [roomName, deviceName] = deviceId.split('_');
+                const newQuantity = parseInt(input.value) || 0; 
+                const deviceRef = ref(database, `rooms/${roomName}/devices/${deviceName}`);
+                set(deviceRef, { quantity: newQuantity });
+            });
+
+            toggleBtns.forEach(btn => {
+                const deviceId = btn.id; 
+                const [roomName, deviceName] = deviceId.split('_'); 
+                const newStatus = btn.classList.contains('active') ? 1 : 0;
+                console.log(roomName, deviceName)
+                console.log(newStatus)
+
+                if (deviceName === "Lock" && newStatus === 0){
+                  console.log('this is being executed')
+                  let tempdbRef = ref(database, 'my-device')
+                  update(tempdbRef, {locks: 0})
+                }
+                const deviceRef = ref(database, `rooms/${roomName}/devices/${deviceName}`);
+                update(deviceRef, { status: newStatus });
+            });           
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const roomsRef = ref(database, 'rooms');
+
+            function fetchAndUpdateDeviceValues() {
+                onValue(roomsRef, (snapshot) => {
+                    const roomsData = snapshot.val();
+                    if (roomsData) {
+                        updateDeviceValues(roomsData);
+                    } else {
+                        console.error('No data found in rooms.');
+                    }
+                }, (error) => {
+                    console.error(`Error retrieving data: ${error.message}`);
+                });
+            }
+
+            fetchAndUpdateDeviceValues();
+
+            setInterval(fetchAndUpdateDeviceValues, 1000);
+
+            const gadgetsContainer = document.querySelector('.gadgets');
+            gadgetsContainer.addEventListener('click', updateDatabase);
+        });
+
+
+        window.onload = function() {
+            initializeSwitchMapping();
+            toggleRoom('all');
+            calculateAverages();
+            setInterval(calculateAverages, 3000);
+        };
+    </script>
+</body>
+</html>
